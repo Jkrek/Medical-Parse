@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MedicalParse - Symptom Interpreter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .intro {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+        }
+        .warning {
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 40px; 
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 15px;
+            margin: 10px auto; 
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            width: 20%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="intro">
+        MedicalParse is a software designed to help the average person come to the doctor prepared. It takes symptoms experienced by the user, converting them into medical lingo and then searching the World Health Organization IDP-11 Database for relevant diseases. We use natural language processsing algorithms provided by OpenAI to ensure that your symptoms are searched using the most relevant medical terminology.
+    </div>
+    <div class="warning">
+        The purpose of this software is to identify underrepresented potential morbidity causes, not to provide any sort of diagnosis. All findings should be discussed with a medical professional.
+    </div>
+    <h3>Input All Symptoms With Commas In Between</h3>
+    <form action="/api/diseases" method="post">
+        <label for="symptoms">Enter Symptoms:</label><br>
+        <input type="text" id="symptoms" name="symptoms"><br>
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>
