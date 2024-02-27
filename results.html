@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .top-diseases {
+            margin: 20px auto;
+            width: 80%;
+        }
+        .top-diseases h2 {
+            font-size: 300%;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .diseases-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+            justify-content: center;
+        }
+        .diseases-list li {
+            background-color: #f8f8f8;
+            padding: 10px;
+            border: 1px solid #eaeaea;
+            margin: 10px;
+            font-weight: bold;
+            font-size: 130%;
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-diseases">
+        <h2>Top Disease</h2>
+    </div>
+    <div class="diseases-list">
+        {% if top_diseases %}
+            {% for disease in top_diseases %}
+                <li>{{ disease }}</li>
+            {% endfor %}
+        {% else %}
+            <p>No diseases found. Please try again with different symptoms.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
