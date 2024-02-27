@@ -16,14 +16,6 @@ Challenges We Faced
 
 Our journey was not without its hurdles. Integrating Python code into our web infrastructure proved to be a formidable challenge, which we eventually overcame through the adoption of Flask—though not without a six-hour marathon of troubleshooting. We also grappled with incorporating animations into our UI and embarked on a painstaking quest to find a dataset that met our precise needs.
 
-Accomplishments We're Proud Of
-
-We take pride in several key achievements throughout the development of MedicalParse. Successfully integrating not one, but two APIs into our platform was a significant milestone. Additionally, the rapid acquisition of new skills and tools, such as Flask and TensorFlow, was particularly gratifying. Above all, our ability to create a tool with the potential to benefit a wide audience stands as our crowning achievement.
-
-What We Learned
-
-The development of MedicalParse was a profound learning experience for our team. We mastered the art of bridging the gap between back-end and front-end development, became adept at utilizing APIs and visualizing data, and expanded our proficiency in languages and tools that were previously unfamiliar territories. This project fostered an environment of collaboration and skill-sharing, enabling each team member to broaden their technical expertise.
-
 What's Next for MedicalParse
 
 Looking ahead, we envision a bright future for MedicalParse. Our roadmap includes a comprehensive overhaul of the user interface to enhance the user experience, the integration of more advanced generative AI features, and the expansion of our platform to a virtual server environment. We are committed to continuously improving MedicalParse, making it an even more valuable resource for individuals seeking medical insights.
