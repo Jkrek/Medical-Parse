@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Issue Checker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            animation: pulseAnimation 2s ease-in-out infinite;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        @keyframes pulseAnimation {
+            0% {
+                opacity: 0.8;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.8;
+            }
+        }
+
+        #bannerContainer {
+            background-color: #00246b;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 2;
+        }
+
+        #bannerBar {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #bannerBar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        #bannerBar a:hover {
+            text-decoration: underline;
+            color: #cadcfc;
+        }
+
+        #contentContainer {
+            max-width: 800px;
+            background-color: #fff;
+            padding: 40px 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            margin-top: 100px;
+            position: relative;
+            z-index: 3; /* Set z-index to bring it above the footer */
+        }
+
+        #contentContainer:hover {
+            transform: scale(1.02);
+        }
+
+        h1 {
+            color: #00246b;
+            text-shadow: 2px 2px 4px #cadcfc;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 20px 0 8px;
+            color: #00246b;
+            font-weight: bold;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #009688;
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00796b;
+        }
+
+        #diagnosisContainer {
+            display: none;
+            margin-top: 40px;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        #diagnosisContainer:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        strong {
+            color: #00246b;
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        li {
+            margin: 0 10px 10px 0;
+            background-color: #009688;
+            color: white;
+            padding: 14px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .symptomCheckbox {
+            margin: 0 10px 10px 0;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .symptomCheckbox label {
+            margin-left: 5px;
+            color: #00246b;
+        }
+
+        #submitBtn,
+        #resetBtn {
+            background-color: #009688;
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            display: none;
+            transition: background-color 0.3s ease;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        #submitBtn:hover,
+        #resetBtn:hover {
+            background-color: #00796b;
+        }
+
+        #footer {
+            background-color: #00246b;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Banner Bar -->
+    <div id="bannerContainer">
+        <div id="bannerBar">
+            <a href="index.html">Medinator</a>
+            <a href="about_product.html">About the Product</a>
+            <a href="about_us.html">About Us</a>
+        </div>
+    </div>
+
+    <div id="contentContainer">
+        <h1>Medical Issue Checker</h1>
+
+        <label for="searchInput">Enter your medical issue:</label>
+        <input type="text" id="searchInput"
+            placeholder="E.g., I have a painful lump in my breast, should I be worried?"
+            onkeypress="handleKeyPress(event)">
+
+        <button onclick="checkMedicalIssue()">Check Medical Issue</button>
+        <button id="resetBtn" onclick="resetSearch()">Reset Search</button>
+
+        <div id="diagnosisContainer">
+            <!-- Potential diagnoses and symptom checkboxes will be displayed here -->
+        </div>
+
+        <button id="submitBtn" onclick="submitSymptoms()">Submit Symptoms</button>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer">
+        <p>&copy; 2024 Medinator. All rights reserved.</p>
+    </div>
+
+    <script>
+        function checkMedicalIssue() {
+            var userInput = document.getElementById("searchInput").value.toLowerCase();
+            var hasKeyword = userInput.includes("lump");
+
+            if (hasKeyword) {
+                var potentialDiagnoses = ["Benign cyst", "Fibroadenoma", "Inflammatory breast cancer"];
+                var diagnosisHtml = "<strong>Potential Diagnoses:</strong><ul>";
+                potentialDiagnoses.forEach(diagnosis => {
+                    diagnosisHtml += "<li>" + diagnosis + "</li>";
+                });
+                diagnosisHtml += "</ul>";
+
+                var symptomCheckboxesHtml = "<strong>Check Symptoms:</strong><br>";
+                var symptoms = ["Pain", "Swelling", "Changes in skin texture", "Nipple discharge"];
+                symptoms.forEach(symptom => {
+                    symptomCheckboxesHtml += `<div class="symptomCheckbox">
+                                               <input type="checkbox" id="${symptom}" value="${symptom}">
+                                               <label for="${symptom}">${symptom}</label>
+                                           </div>`;
+                });
+
+                var diagnosisContainer = document.getElementById("diagnosisContainer");
+                diagnosisContainer.innerHTML = diagnosisHtml + "<br>" + symptomCheckboxesHtml;
+                diagnosisContainer.style.display = "block";
+
+                document.getElementById("submitBtn").style.display = "block";
+            } else {
+                document.getElementById("diagnosisContainer").innerHTML = "<strong>No relevant keyword found.</strong>";
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                checkMedicalIssue();
+            }
+        }
+
+        function resetSearch() {
+            document.getElementById("searchInput").value = "";
+            document.getElementById("diagnosisContainer").style.display = "none";
+            document.getElementById("submitBtn").style.display = "none";
+        }
+
+        function submitSymptoms() {
+            alert("Symptoms submitted! Further processing can be added.");
+        }
+    </script>
+
+</body>
+
+</html>
